@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>springboot学习</title>
+    <script th:src="@{/js/jquery-1.8.3.js}"></script>
+<style>
+    body{
+    background-image:url('/image/me.jpg');
+    }
+    th{
+        width: 200px;
+    }
+</style>
+</head>
+
+<body>
+<h1 th:inline="text">home</h1>
+
+
+<form name="myForm" method="post" action="/search">
+    <th>
+        <div class="err" id="err">
+
+        </div>
+        <div class="txt_div">
+            <span class="txt_span">请输入俱乐部id或名称</span>
+            <input type="text" name="gym" class="txt"style="margin-left: 15px;">
+        </div>
+        <div class="txt_div">
+            <span class="txt_span">请输入教练id或名称</span>
+            <input type="text" name="coach" class="txt" style="margin-left: 30px;">
+        </div>
+        <div class="div_3">
+            <input type="submit" class="sub" value="查询" style="width:4%">
+        </div>
+    </th>
+</form>
+
+
+<table align="left" border="1" cellspacing="0">
+    <tr>
+        <th>教练id</th>
+        <th>姓名</th>
+        <th>俱乐部名称</th>
+        <th>注册时间</th>
+        <th>更新时间</th>
+        <th>具体信息</th>
+    <tr>
+    <tr th:each="customer:${hello}">
+        <td th:text="${customer.id}"></td>
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.gym.getName()}"></td>
+        <td th:text="${customer.getCreateTime()}"></td>
+        <td th:text="${customer.getUpdateTime()}"></td>
+        <td th:text="${customer.info}"></td>
+    </tr>
+</body>
+</html>
+

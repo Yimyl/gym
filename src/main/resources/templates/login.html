@@ -1,0 +1,65 @@
+<!doctype html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" type="text/css" media="all" href="../../css/gtvg.css" th:href="@{/css/gtvg.css}" />
+
+        <script type="text/javascript">
+            function check(){
+                var email = document.forms["myForm"]["username"].value;
+                var pwd = document.forms["myForm"]["password"].value;
+                var er = document.getElementById("err");
+                er.innerHTML = "";
+                if(email === null || email === "" || pwd === null || pwd === ""){
+                    er.innerHTML +="Email or password should not be empty!";
+                    return false;
+                }
+                var at_pos=email.indexOf("@");
+                var dot_pos=email.lastIndexOf(".");
+                if (at_pos<1 || dot_pos<at_pos+2 || dot_pos+2>=email.length){
+                    er.innerHTML +="Invalid email!";
+                    return false;
+                }
+
+                return true;
+
+            }
+        </script>
+    </head>
+    <body>
+        <main>
+            <!-- insert your code here -->
+            <#--<img src = "/image/background.jpg">-->
+            <div class="right_part">
+                <div class="login_part">
+
+                    <form name="myForm" method="post" action="/login_handle" onsubmit="return check()">
+                        <div class="err" id="err">
+
+                        </div>
+                        <p style="color:red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}">
+                        <div class="txt_div">
+                            <span class="txt_span">Email Address</span>
+                            <input type="text" name="username" class="txt">
+
+                        </div>
+                        <div class="txt_div">
+                            <span class="txt_span">Password</span>
+                            <input type="password" name="password" class="txt">
+                        </div>
+                        <div class="div_3">
+                            <input type="submit" class="sub" value="login">
+                        </div>
+                        <div class="div_3">
+                            <a class="tip" href="/register">Register</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+    </body>
+</html>
